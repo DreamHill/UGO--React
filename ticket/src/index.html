@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+  <title>极致单页</title>
+  <link rel="stylesheet" href="./assets/style/style.css">
+</head>
+
+<body ontouchstart>
+  <div id='root'></div>
+  <!-- partial -->
+  <script src='./assets/script/react.production.min.js'></script>
+  <script src='./assets/script/react-dom.production.min.js'></script>
+  <script src='./assets/script/babel.min.js'></script>
+  <script type="module" src="./base.js"></script>
+
+  <script type="text/babel">
+    const {useState} = React
+    class SearchForm extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {keyword: ''};
+      }
+      myChangeHandler = (event) => {
+        this.setState({keyword: event.target.value});
+      }
+      search = (event) => {
+        console.log(this.state.keyword);
+      }
+      timepick = (event) => {
+        return <div id="timepock">时间控件</div>;
+      }
+      render() {
+        return (
+          <div class="deep_box">
+            <div class="search_bar">
+              <input class="search_keywords" type='text' onChange={this.myChangeHandler} placeholder="输入活动、艺人或城市" />
+              <span onClick={this.search}>搜索</span>
+            </div>
+            <div class="choice_time_bar">
+              <span>
+                或选择日期
+              </span>
+              <span onClick={this.timepick}>
+                日期
+              </span>
+            </div>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<SearchForm />, document.getElementById('deep_search'));
+  </script>
+</body>
+
+</html>
